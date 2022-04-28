@@ -1,0 +1,33 @@
+{
+  "name": "@yangin/cli-devops",
+  "version": "1.0.0",
+  "description": "a cli library for devops",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yangin/cli.git"
+  },
+  "author": "yangjin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yangin/cli/issues"
+  },
+  "homepage": "https://github.com/yangin/cli#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^9.1.0",
+    "dayjs": "^1.11.1",
+    "figlet": "^1.5.2",
+    "inquirer": "^8.2.2",
+    "ora": "5.4.1",
+    "prettier": "^2.6.2",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "@yangin/eslint-config-yangin-base": "^1.0.3",
+    "eslint": "^8.2.0"
+  }
+}
