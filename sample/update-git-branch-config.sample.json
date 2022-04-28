@@ -1,0 +1,10 @@
+[ 
+  { 
+    "jobName": "job-name", 
+    "branch": "new-branch-name" 
+  }, 
+  { 
+    "jobName": "job-name2", 
+    "branch": "new-branch-name" 
+  } 
+]
