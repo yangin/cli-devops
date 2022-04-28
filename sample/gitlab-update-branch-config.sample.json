@@ -1,0 +1,16 @@
+[
+  {
+    "projectId": "1",
+    "projectName": "project-name-1",
+    "branches" : [
+      {
+        "oldBranch": "dev_branch",
+        "newBranch": "dev"
+      },
+      {
+        "oldBranch": "master_branch",
+        "newBranch": "master"
+      }
+    ]
+  }
+]

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/yangin/cli#readme",
   "dependencies": {
+    "@gitbeaker/node": "^35.6.0",
     "chalk": "^4.1.2",
     "commander": "^9.1.0",
     "dayjs": "^1.11.1",
