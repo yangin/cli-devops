@@ -5,6 +5,7 @@ const { Command } = require('commander')
 const Auth = require('./auth')
 const Gitlab = require('./gitlab')
 const Jenkins = require('./jenkins')
+const Git = require('./git')
 
 const program = new Command()
 
@@ -42,5 +43,23 @@ program
   .command('gitlab')
   .description('manager gitlab, include chat')
   .action(() => { Gitlab.action() })
+
+/**
+ * 本地git管理
+ * command: devops git tag | tag-push
+ */
+ program
+ .command('git')
+ .description('manager local git, include tag, tag-push, tag-delete')
+ .argument('<command> [tag]', 'tag | tag-push | tag-delete version')
+ .argument('[tag]', 'version')
+ .action((command, tag) => {
+   switch (command) {
+     case 'tag': Git.tag(); break
+     case 'tag-push': Git.tagPush(); break
+     case 'tag-delete': Git.deleteTag(tag); break
+     default: console.log(chalk.red('command not found')); break
+   }
+ })
 
 program.parse()

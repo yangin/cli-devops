@@ -25,6 +25,9 @@ devops gitlab
 
 # 管理auth
 devops auth
+
+# 管理本地git
+devops git
 ```
 
 ## Table of Contents
@@ -58,4 +61,16 @@ devops auth login
 devops auth logout
 # 查看当前已登录auth清单
 devops auth list
+```
+
+### Git
+
+管理本地的Git操作
+```bash
+# 基于package.json version打tag
+devops git tag
+# 基于package.json version打tag并push到远程
+devops git tag-push
+# 删除本地与远程上的指定tag
+devops git tag-delete <version>
 ```

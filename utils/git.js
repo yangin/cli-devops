@@ -1,4 +1,4 @@
-const { execSync } = require('child_process')
+const { execSync, exec } = require('child_process')
 const { isExistFileInDir } = require('./file')
 /**
  * 检测当前是否在git仓库中
@@ -158,6 +158,52 @@ const stashPop = async () => {
   execSync('git stash pop')
 }
 
+/**
+ * 删除remote上的分支或tags
+ * @param {String} branch 分支或tags名称 例如：master 
+ */
+const deleteRemoteBranchOrTag = async (branch) => {
+  await exec(`git push origin :${branch}`)
+}
+
+/**
+ * add a tag
+ * @param {String} version 
+ */
+const addTag = (version) => {
+  execSync(`git tag ${version}`)
+}
+
+/**
+ * delete a tag
+ */
+const deleteTag = async (version) => {
+  await exec(`git tag -d ${version}`)
+}
+
+/**
+ * list tags
+ */
+const tagList = () => {
+  const stdout = execSync('git tag').toString()
+  const tags = stdout.split('\n')
+  return tags
+}
+
+/**
+ * push single tag
+ */
+const pushTag = async (tag) => {
+  await exec(`git push origin ${tag}`)
+}
+
+/**
+ * push all tag
+ */
+ const pushTags = async () => {
+  await exec(`git push tags`)
+}
+
 module.exports = {
   GitCheck: {
     isInGitDir,
@@ -178,6 +224,14 @@ module.exports = {
     coverCreateBranchByTarget,
     coverBranch,
     stash,
-    stashPop
+    stashPop,
+    deleteRemoteBranchOrTag,
+  },
+  GitTag: {
+    tagList,
+    addTag,
+    deleteTag,
+    pushTag,
+    pushTags
   }
 }
