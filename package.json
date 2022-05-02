@@ -37,7 +37,7 @@
     "prettier": "^2.6.2",
     "xml-js": "^1.6.11"
   },
-  "devDependencies": {
+  "optionalDependencies": {
     "@yangin/eslint-config-yangin-base": "^1.0.3",
     "eslint": "^8.2.0"
   }
