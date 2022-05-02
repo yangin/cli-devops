@@ -4,7 +4,8 @@
   "description": "a cli library for devops",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tag-push": "node ./script/tag-push.js"
   },
   "bin": {
     "devops": "./bin/index.js"
