@@ -10,10 +10,25 @@ const getAbsolutePath = (targetPath) => {
 }
 
 /**
+ * 获取进程当前执行的目录
+ */
+ const getProcessDir = () => {
+  return process.cwd()
+}
+
+/**
  * 获取桌面路径
  */
 const getDesktopPath = () => {
   return `${os.homedir()}/Desktop`
+}
+
+/**
+ * 获取安装项目的package.json文件路径
+ * @returns {string}
+ */
+const getPackageJsonPath = () => {
+  return `${getProcessDir()}/package.json`
 }
 
 /**
@@ -24,7 +39,9 @@ const getUserRootPath = () => {
 }
 
 module.exports = {
+  getProcessDir,
   getAbsolutePath,
   getDesktopPath,
-  getUserRootPath
+  getUserRootPath,
+  getPackageJsonPath
 }
