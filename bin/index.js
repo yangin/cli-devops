@@ -51,7 +51,7 @@ program
 program
   .command('git')
   .description('manager local git, include tag, tag-push, tag-delete')
-  .argument('<command> [tag]', 'tag | tag-push | tag-delete version')
+  .argument('<command>', 'tag | tag-push | tag-delete version')
   .argument('[tag]', 'version')
   .action((command, tag) => {
     switch (command) {
