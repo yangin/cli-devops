@@ -160,7 +160,7 @@ const stashPop = async () => {
 
 /**
  * 删除remote上的分支或tags
- * @param {String} branch 分支或tags名称 例如：master 
+ * @param {String} branch 分支或tags名称 例如：master
  */
 const deleteRemoteBranchOrTag = async (branch) => {
   await exec(`git push origin :${branch}`)
@@ -168,7 +168,7 @@ const deleteRemoteBranchOrTag = async (branch) => {
 
 /**
  * add a tag
- * @param {String} version 
+ * @param {String} version
  */
 const addTag = (version) => {
   execSync(`git tag ${version}`)
@@ -200,7 +200,7 @@ const pushTag = async (tag) => {
 /**
  * push all tag
  */
- const pushTags = async () => {
+const pushTags = async () => {
   await exec(`git push tags`)
 }
 
@@ -225,7 +225,7 @@ module.exports = {
     coverBranch,
     stash,
     stashPop,
-    deleteRemoteBranchOrTag,
+    deleteRemoteBranchOrTag
   },
   GitTag: {
     tagList,

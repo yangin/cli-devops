@@ -11,14 +11,13 @@ const { addTag } = require('./helper')
 
 const tag = async () => {
   const res = await addTag()
-  if(!res) return 
+  if (!res) return
   success(`${chalk.cyan('版本号')}: ${chalk.green(res)}`)
 }
 
 const tagPush = async () => {
-
   const res = await addTag()
-  if(!res) return 
+  if (!res) return
 
   const spinner = loading('正在Pushing...')
 

@@ -12,7 +12,7 @@ const getAbsolutePath = (targetPath) => {
 /**
  * 获取进程当前执行的目录
  */
- const getProcessDir = () => {
+const getProcessDir = () => {
   return process.cwd()
 }
 
