@@ -2,6 +2,7 @@
 
 const chalk = require('chalk')
 const { Command } = require('commander')
+const Cache = require('./cache')
 const Auth = require('./auth')
 const Gitlab = require('./gitlab')
 const Jenkins = require('./jenkins')
@@ -60,6 +61,17 @@ program
       case 'tag-delete': Git.deleteTag(tag); break
       default: console.log(chalk.red('command not found')); break
     }
+  })
+
+/**
+ * cache
+ */
+program
+  .command('cache')
+  .description('manager cache')
+  .argument('<command>', 'clear')
+  .action((action) => {
+    if (action === 'clear') Cache.clear()
   })
 
 program.parse()
