@@ -2,11 +2,13 @@
 
 const chalk = require('chalk')
 const { Command } = require('commander')
+const { isEmptyObject } = require('../utils/object')
 const Cache = require('./cache')
 const Auth = require('./auth')
 const Gitlab = require('./gitlab')
 const Jenkins = require('./jenkins')
 const Git = require('./git')
+const Local = require('./files')
 
 const program = new Command()
 
@@ -61,6 +63,23 @@ program
       case 'tag-delete': Git.deleteTag(tag); break
       default: console.log(chalk.red('command not found')); break
     }
+  })
+
+/**
+ * zip
+ * command: devops zip dist | devops zip dist -d
+ */
+program
+  .command('zip')
+  .description('zip directory')
+  .argument('<dir>', 'tag | tag-push | tag-delete version')
+  .option('-d, --date', 'name by date')
+  .option('-t, --time', 'name by time')
+  .option('-n, --name', 'name by name')
+  .option('-v, --version', 'name by version')
+  .action((dir, options) => {
+    const type = (!options || isEmptyObject(options)) ? undefined : Object.keys(options)[ 0 ]
+    Local.zip(dir, type)
   })
 
 /**
