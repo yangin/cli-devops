@@ -24,10 +24,16 @@ devops jenkins
 devops gitlab
 
 # 管理auth
-devops auth
+devops auth <command>
 
 # 管理本地git
-devops git
+devops git <command> [tag]
+
+# 管理cache
+devops cache <command>
+
+# zip
+devops zip <dir> [-v | -n | -d |-t]
 ```
 
 ## Table of Contents
@@ -66,6 +72,7 @@ devops auth list
 ### Git
 
 管理本地的Git操作
+
 ```bash
 # 基于package.json version打tag
 devops git tag
@@ -73,4 +80,27 @@ devops git tag
 devops git tag-push
 # 删除本地与远程上的指定tag
 devops git tag-delete <version>
+```
+
+### Cache
+
+管理本地的缓存，缓存文件地址 `~/.cache/@pplmc/clo-devops`
+
+```bash
+# 清空缓存
+devops cache clear
+```
+
+### zip
+
+压缩目录成.zip格式，根据指定规则自动生产包名
+
+* -t, --time: 根据时间生成包名（默认），如 admin_20220506145701.zip
+* -d, --data: 根据日期生成包名，当天重复打包会依次递增，如 admin_20220506_1.zip
+* -n, --name: 根据package.json中的name生成包名，当天重复打包会依次递增尾号，如 admin_1.zip
+* -v, --version: 根据package.json中的version生成包名，如 admin_1_0_0.zip
+
+```bash
+# 根据版本号生成包名
+devops zip dist -v
 ```
