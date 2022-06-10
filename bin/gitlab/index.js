@@ -18,6 +18,7 @@ const outputDir = `${getDesktopPath()}/gitlab`
 
 const hooksConfigFileName = 'gitlab-hooks-config.json'
 const updateBranchConfigFileName = 'gitlab-update-branch-config.json'
+const protectedBranchConfigFileName = 'gitlab-protected-branch-config.json'
 
 const chat = async () => {
   const { host, username, token, operation } = await inquirer.prompt([
@@ -37,6 +38,10 @@ const chat = async () => {
         {
           name: '2.批量更新Branch',
           value: 'updateBranch'
+        },
+        {
+          name: '3.批量设置受保护分支',
+          value: 'protectedBranches'
         }
       ]
     }
@@ -120,6 +125,7 @@ const addWebhook = async (gitlab) => {
 
 /**
  * 批量更新git仓库的branch
+ * TODO: 当同时更新>=3个分支时，会卡死
  */
 const updateProjectBranches = async (gitlab) => {
   // 检查配置文件
@@ -201,6 +207,31 @@ const updateProjectBranches = async (gitlab) => {
   }
 }
 
+const protectedBranches = async (gitlab) => {
+  const isExist = await isExistConfigFile(outputDir, protectedBranchConfigFileName)
+  if (!isExist) return
+
+  // 读取配置文件
+  const branchConfigList = JSON.parse(fs.readFileSync(`${outputDir}/${protectedBranchConfigFileName}`))
+  // 只有当配置文件的数据没问题时，才执行更新操作
+  // 此处逐个更新，避免一次性更新太多，导致gitlab报错
+  const update = async (project) => {
+    const { projectId, projectName, branches } = project
+    const spinner = loading(`正在更新${projectName}的分支...`)
+
+    for (let i = 0; i < branches.length; i++) {
+      await gitlab.ProtectedBranches.protect(String(projectId), branches[ i ])
+    }
+
+    success(`${projectName}的分支更新完毕`, spinner)
+  }
+
+  for (let i = 0; i < branchConfigList.length; i++) {
+    const project = branchConfigList[ i ]
+    await update(project)
+  }
+}
+
 const action = async () => {
   const { operation } = await chat()
   const res = await loginGitlab()
@@ -213,6 +244,7 @@ const action = async () => {
     case 'exportProjectList': exportAllProjectsInfo(gitlab); break
     case 'addWebhook': addWebhook(gitlab); break
     case 'updateBranch': updateProjectBranches(gitlab); break
+    case 'protectedBranches': protectedBranches(gitlab); break
     default: break
   }
 }

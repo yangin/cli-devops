@@ -1,0 +1,7 @@
+[
+  {
+    "projectId": "1",
+    "projectName": "project-name-1",
+    "branches": ["master", "test"]
+  }
+]
