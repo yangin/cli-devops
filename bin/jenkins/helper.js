@@ -73,6 +73,7 @@ const hasGitConfig = (configXML) => {
  * @returns
  */
 const hasAutoBuildConfig = (dataJson) => {
+  if (!dataJson.project.triggers || !dataJson.project.triggers[ 'org.jenkinsci.plugins.gwt.GenericTrigger' ] || !dataJson.project.triggers[ 'org.jenkinsci.plugins.gwt.GenericTrigger' ].genericVariables) return false
   const { genericVariables: currentGenericVariables } = dataJson.project.triggers[ 'org.jenkinsci.plugins.gwt.GenericTrigger' ]
   const { genericVariables } = GIT_WEBHOOK_TRIGGERS[ 'org.jenkinsci.plugins.gwt.GenericTrigger' ]
   return JSON.stringify(currentGenericVariables) === JSON.stringify(genericVariables)
@@ -104,7 +105,7 @@ const syncUpdateGitBranchConfigSample = async (jenkins, sampleFilePath) => {
 
   const requestList = list.map(jobName => jenkins.getJobJsonConfig(jobName))
   const res = await Promise.all(requestList)
-  res.forEach((config) => config.gitUrl && sampleConfig.push({ jobName: config.jobName, branch: config.branch, newBranch: '' }))
+  res.forEach((config) => config.gitUrl && sampleConfig.push({ jobName: config.jobName, repoName: config.repoName, branch: config.branch, newBranch: '' }))
 
   writeFileSync(sampleFilePath, jsonFormat(JSON.stringify(sampleConfig)))
 }
