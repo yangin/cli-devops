@@ -1,3 +1,4 @@
 module.exports = {
-  'extends': '@yangin/eslint-config-yangin-base'
+  extends: [require.resolve('@yangin/code-style/config/eslint')],
+  rules: {}
 }

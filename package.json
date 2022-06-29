@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tag-push": "node ./script/tag-push.js"
+    "tag-push": "node ./script/tag-push.js",
+    "lint": "eslint --ext .js .",
+    "lint-fix": "eslint --ext .js . --fix"
   },
   "bin": {
     "devops": "./bin/index.js"
@@ -38,8 +40,8 @@
     "prettier": "^2.6.2",
     "xml-js": "^1.6.11"
   },
-  "optionalDependencies": {
-    "@yangin/eslint-config-yangin-base": "^1.0.3",
-    "eslint": "^8.2.0"
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@yangin/code-style": "^1.0.2"
   }
 }
