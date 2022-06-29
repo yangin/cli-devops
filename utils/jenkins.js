@@ -55,7 +55,9 @@ class Jenkins {
         const dataJson = JSON.parse(convert.xml2json(data, { compact: true, spaces: 2 }))
         try {
           const gitUrl = dataJson.project.scm.userRemoteConfigs[ 'hudson.plugins.git.UserRemoteConfig' ].url._text
-          const repoName = gitUrl.split('/').pop().split('.').shift()
+          const repoName = gitUrl.split('/').pop()
+            .split('.')
+            .shift()
           const branch = dataJson.project.scm.branches[ 'hudson.plugins.git.BranchSpec' ].name._text
           const isAutoBuild = hasAutoBuildConfig(dataJson)
           resolve({ jobName, env, client, gitUrl, repoName, branch, isAutoBuild })

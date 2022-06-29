@@ -26,7 +26,7 @@ const addCache = (key, value) => {
   }
 
   if (!cacheInfo[ key ]) {
-    cacheInfo[ key ] = [ value ]
+    cacheInfo[ key ] = [value]
   } else {
     cacheInfo[ key ].push(value)
   }

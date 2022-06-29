@@ -16,12 +16,12 @@ const isBackJob = (jobName) => jobName.includes('-back-')
  * @return {object} { devJobs: [], testJobs: [], prodJobs: [], frontJobs: [], otherJobs: [], otherJobs: [] }
  */
 const classifyJobs = (jobNames) => {
-  let devJobs = []
-  let testJobs = []
-  let prodJobs = []
-  let frontJobs = []
-  let backJobs = []
-  let otherJobs = []
+  const devJobs = []
+  const testJobs = []
+  const prodJobs = []
+  const frontJobs = []
+  const backJobs = []
+  const otherJobs = []
 
   jobNames.forEach(jobName => {
     let isIncludes = false
@@ -49,7 +49,9 @@ const getGitInfo = (configJson) => {
   try {
     gitUrl = configJson.project.scm.userRemoteConfigs[ 'hudson.plugins.git.UserRemoteConfig' ].url._text
     branch = configJson.project.scm.branches[ 'hudson.plugins.git.BranchSpec' ].name._text.replace('*/', '')
-    repoName = gitUrl.split('/').pop().split('.').shift()
+    repoName = gitUrl.split('/').pop()
+      .split('.')
+      .shift()
   } catch (e) {
     console.log('getGitInfo: ', e)
   }
@@ -101,7 +103,7 @@ const addGitWebhookTriggers = (configXML) => {
  */
 const syncUpdateGitBranchConfigSample = async (jenkins, sampleFilePath) => {
   const list = await jenkins.getAllJobNameList()
-  let sampleConfig = []
+  const sampleConfig = []
 
   const requestList = list.map(jobName => jenkins.getJobJsonConfig(jobName))
   const res = await Promise.all(requestList)

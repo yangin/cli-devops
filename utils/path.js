@@ -5,38 +5,28 @@ const os = require('os')
  * @param {string} targetPath 目标路径
  * @returns
  */
-const getAbsolutePath = (targetPath) => {
-  return targetPath.startsWith('/') ? targetPath : path.resolve(__dirname, targetPath)
-}
+const getAbsolutePath = (targetPath) => targetPath.startsWith('/') ? targetPath : path.resolve(__dirname, targetPath)
 
 /**
  * 获取进程当前执行的目录
  */
-const getProcessDir = () => {
-  return process.cwd()
-}
+const getProcessDir = () => process.cwd()
 
 /**
  * 获取桌面路径
  */
-const getDesktopPath = () => {
-  return `${os.homedir()}/Desktop`
-}
+const getDesktopPath = () => `${os.homedir()}/Desktop`
 
 /**
  * 获取安装项目的package.json文件路径
  * @returns {string}
  */
-const getPackageJsonPath = () => {
-  return `${getProcessDir()}/package.json`
-}
+const getPackageJsonPath = () => `${getProcessDir()}/package.json`
 
 /**
  * 获取用户根目录
  */
-const getUserRootPath = () => {
-  return `${os.homedir()}`
-}
+const getUserRootPath = () => `${os.homedir()}`
 
 module.exports = {
   getProcessDir,

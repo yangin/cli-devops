@@ -93,7 +93,7 @@ const addWebhook = async (gitlab) => {
   const isExist = await isExistConfigFile(outputDir, hooksConfigFileName, async (sampleFilePath) => {
     // 更新最新的projects给配置文件
     const projects = await gitlab.Projects.all()
-    const projectInfos = projects.map((project) => { return { projectId: project.id, projectName: project.name } })
+    const projectInfos = projects.map((project) => ({ projectId: project.id, projectName: project.name }))
     writeFileSync(sampleFilePath, jsonFormat(JSON.stringify(projectInfos)))
   })
   if (!isExist) return
@@ -139,7 +139,7 @@ const updateProjectBranches = async (gitlab) => {
         resolve({
           projectId: project.id,
           projectName: project.name,
-          branches: branches.map(branch => { return { oldBranch: branch.name, newBranch: '' } })
+          branches: branches.map(branch => ({ oldBranch: branch.name, newBranch: '' }))
         })
       })
     })
@@ -192,10 +192,9 @@ const updateProjectBranches = async (gitlab) => {
       if (isRepeatNewBranch(projectId, newBranch, pendingList)) {
       // newBranch已存在的情况，resetHard
         return gitlab.Branches.hardReset(projectId, newBranch, oldBranch)
-      } else {
-      // newBranch不存在的情况，直接创建
-        return gitlab.Branches.create(projectId, newBranch, oldBranch)
       }
+      // newBranch不存在的情况，直接创建
+      return gitlab.Branches.create(projectId, newBranch, oldBranch)
     })
     await Promise.all(requestList)
     success(`${projectName}的分支更新完毕`, spinner)

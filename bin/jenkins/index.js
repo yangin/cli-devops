@@ -118,8 +118,8 @@ const exportGitConfig = async (jenkins) => {
   const list = await jenkins.getAllJobNameList()
   const spinner = loading('正在导出Jenkins所有项目的Git配置信息...')
 
-  let gitConfigList = []
-  let noGitConfigList = []
+  const gitConfigList = []
+  const noGitConfigList = []
 
   const requestList = list.map(jobName => jenkins.getJobJsonConfig(jobName))
   const res = await Promise.all(requestList)
@@ -156,7 +156,7 @@ const showAutoBuildJob = async (jenkins) => {
   const gitlab = new Gitlab(loginRes)
   const webhook = await getJenkinsWebhook()
 
-  let githooks = []
+  const githooks = []
   for (let i = 0; i < autoBuildList.length; i++) {
     const job = autoBuildList[ i ]
     const hooks = await gitlab.ProjectHooks.list(job.gitUrl)

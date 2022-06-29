@@ -18,9 +18,7 @@ const getVersion = (name) => {
  * @param {String} name 包名称
  * @returns {String} zipName admin_20220504100000
  */
-const getZipNameByTime = (name) => {
-  return `${name}_${dayjs().format('YYYYMMDDHHmmss')}`
-}
+const getZipNameByTime = (name) => `${name}_${dayjs().format('YYYYMMDDHHmmss')}`
 
 /**
  * 根据包名与version获取zipName
@@ -28,9 +26,7 @@ const getZipNameByTime = (name) => {
  * @param {String} version
  * @returns {String} zipName admin_1_0_0
  */
-const getZipNameByVersion = (name, version) => {
-  return `${name}_${version.replace('.', '_')}`
-}
+const getZipNameByVersion = (name, version) => `${name}_${version.replace('.', '_')}`
 
 /**
  * 根据包名获取zipName

@@ -63,9 +63,7 @@ const validateUpdateBranchConfig = async (configList, gitlab) => {
  * newBranch是否已存在
  * @return {Boolean}
  */
-const isRepeatNewBranch = (projectId, newBranch, pendingList) => {
-  return pendingList.some(pending => pending.projectId === projectId && pending.branches.includes(newBranch))
-}
+const isRepeatNewBranch = (projectId, newBranch, pendingList) => pendingList.some(pending => pending.projectId === projectId && pending.branches.includes(newBranch))
 
 module.exports = {
   validateUpdateBranchConfig,

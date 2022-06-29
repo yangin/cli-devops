@@ -49,7 +49,7 @@ const loginJenkins = async () => {
  */
 const getJenkinsWebhook = async () => {
   // 先从本地获取用户信息
-  let authInfo = await getLocalAuthInfo('Jenkins')
+  const authInfo = await getLocalAuthInfo('Jenkins')
   const { host, username, token } = authInfo
   return `http://${username}:${token}@${host}/generic-webhook-trigger/invoke`
 }

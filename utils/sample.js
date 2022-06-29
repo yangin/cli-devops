@@ -18,9 +18,7 @@ const sampleFileName = (fileName) => {
  * @param {String} targetFileName
  * @returns {String} sample文件的绝对路径
  */
-const getSampleFilePath = (targetFileName) => {
-  return `${sampleDir}/${sampleFileName(targetFileName)}`
-}
+const getSampleFilePath = (targetFileName) => `${sampleDir}/${sampleFileName(targetFileName)}`
 
 /**
  * 导出配置文件样本

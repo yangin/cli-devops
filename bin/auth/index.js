@@ -16,6 +16,7 @@ const packageJson = require('../../package.json')
 const { authLogin } = require('../../helper/auth')
 const { jenkinsChat } = require('../../helper/jenkins')
 const { gitlabChat } = require('../../helper/gitlab')
+
 const authConfigFilePath = `${getUserRootPath()}/.config/${packageJson.name}/auth.json`
 
 /**
@@ -27,7 +28,7 @@ const login = async () => {
       type: 'list',
       name: 'server',
       message: '请选择要登录的服务',
-      choices: [ 'Jenkins', 'Gitlab' ]
+      choices: ['Jenkins', 'Gitlab']
     }
   ])
 

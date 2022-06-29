@@ -8,9 +8,7 @@ const { getAbsolutePath } = require('./path')
  * @param {string} dirPath 目录路径
  * @returns {boolean}
  */
-const isExistFileInDir = (fileName, dir) => {
-  return fs.existsSync(`${dir}/${fileName}`)
-}
+const isExistFileInDir = (fileName, dir) => fs.existsSync(`${dir}/${fileName}`)
 
 /**
  * 获取指定json文件中的json数据
@@ -26,7 +24,8 @@ const getJsonInFile = (jsonPath) => {
  * @params {string} dirPath 文件夹路径
  */
 const mkdir = (dirPath) => {
-  const dirArr = getAbsolutePath(dirPath).split('/').slice(1)
+  const dirArr = getAbsolutePath(dirPath).split('/')
+    .slice(1)
   dirArr.forEach(async (dir, index) => {
     const currentDir = `/${dirArr.slice(0, index + 1).join('/')}`
     if (!fs.existsSync(currentDir)) {

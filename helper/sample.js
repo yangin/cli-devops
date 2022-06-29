@@ -31,8 +31,8 @@ async function isExistConfigFile (dirPath, fileName, callback) {
     if (typeof callback === 'function') { await callback(getSampleFilePath(fileName)) }
     exportSampleFile(dirPath, fileName)
 
-    failed(`配置文件${chalk.cyan(semanticTips(dirPath + '/' + fileName))}不存在, 请配置好后再执行`)
-    console.log(`\r\n  请参考${chalk.cyan(semanticTips(dirPath + '/' + sampleFileName(fileName)))}文件内容格式`)
+    failed(`配置文件${chalk.cyan(semanticTips(`${dirPath}/${fileName}`))}不存在, 请配置好后再执行`)
+    console.log(`\r\n  请参考${chalk.cyan(semanticTips(`${dirPath}/${sampleFileName(fileName)}`))}文件内容格式`)
     return false
   }
   return true
