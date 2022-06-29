@@ -1,6 +1,6 @@
 {
   "name": "@yangin/cli-devops",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "a cli library for devops",
   "main": "index.js",
   "scripts": {
