@@ -9,6 +9,7 @@ const Gitlab = require('./gitlab')
 const Jenkins = require('./jenkins')
 const Git = require('./git')
 const Local = require('./files')
+const Nginx = require('./nginx')
 
 const program = new Command()
 
@@ -91,6 +92,20 @@ program
   .argument('<command>', 'clear')
   .action((action) => {
     if (action === 'clear') Cache.clear()
+  })
+
+/**
+ * nginx
+ * command: devops nginx -c ./nginx.conf -l logo
+ */
+program
+  .command('nginx')
+  .description('manager nginx')
+  .option('-c, --config <char>', 'config file path')
+  .option('-l, --logo <char>', 'show logo string')
+  .action((options) => {
+    const { config, logo } = options
+    Nginx.start(config, logo)
   })
 
 program.parse()
