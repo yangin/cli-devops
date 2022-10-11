@@ -1,5 +1,6 @@
 /**
- * 管理缓存
+ * nginx 启动
+ * 需要在项目中配置 nginx.conf、mime.types 文件，且在同一目录下
  */
 const path = require('path')
 const { exec } = require('child_process') // child_process负责执行shell
