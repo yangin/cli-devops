@@ -15,9 +15,9 @@ const addTag = async () => {
   const packagePath = getPackageJsonPath()
   const { version } = require(packagePath)
   const tags = await GitTag.tagList()
-
-  if (tags.includes(version)) {
-    failed(`tag ${version} already exists`)
+  const versionName = `v${version}`
+  if (tags.includes(versionName)) {
+    failed(`tag ${versionName} already exists`)
 
     console.log(`\r\n 请更新版本号，或者删除已有的tag`)
 
@@ -27,13 +27,13 @@ const addTag = async () => {
   }
 
   try {
-    await GitTag.addTag(version)
+    await GitTag.addTag(versionName)
   } catch (e) {
     console.log(chalk.red(e))
     return
   }
 
-  return version
+  return versionName
 }
 
 module.exports = {
